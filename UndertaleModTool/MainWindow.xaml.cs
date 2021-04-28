@@ -45,6 +45,7 @@ namespace UndertaleModTool
     public partial class MainWindow : Window, INotifyPropertyChanged, IScriptInterface
     {
         public UndertaleData Data { get; set; }
+        public ScriptConfiguration Configuration { get; set; }
         public string FilePath { get; set; }
         public string ScriptPath { get; set; } // For the scripting interface specifically
 
@@ -225,6 +226,7 @@ namespace UndertaleModTool
 
             FilePath = null;
             Data = UndertaleData.CreateNew();
+            Configuration = new ScriptConfiguration("script_configuration.cfg");
             CloseChildFiles();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Data"));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsGMS2"));
@@ -377,6 +379,7 @@ namespace UndertaleModTool
                             CloseChildFiles();
                         this.Data = data;
                         this.FilePath = filename;
+                        Configuration = new ScriptConfiguration("script_configuration.cfg");
                         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Data"));
                         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FilePath"));
                         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsGMS2"));
